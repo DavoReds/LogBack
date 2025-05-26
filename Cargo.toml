@@ -2,6 +2,8 @@
 name = "logback"
 version = "0.1.0"
 edition = "2024"
+authors = ["Samuel David Rojas Vallejo <samueldavidrojasvallejo@gmail.com>"]
+description = "Aplicación para administrar listas de pendientes."
 
 [dependencies]
 actix-web = "4.11.0"
