@@ -1,0 +1,8 @@
+DELETE FROM
+  estados
+WHERE
+  id IN (
+    '01971269-b73b-77de-9504-e5f18d6a109b',
+    '0197126c-325c-7709-85c7-b2e183182223',
+    '0197126d-bf8d-73db-a087-7f6f3b537d20'
+  );
