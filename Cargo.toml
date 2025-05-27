@@ -8,9 +8,15 @@ description = "Aplicación para administrar listas de pendientes."
 [dependencies]
 actix-web = "4.11.0"
 anyhow = "1.0.98"
-compact_str = { version = "0.9.0", features = ["serde", "sqlx", "sqlx-postgres", "zeroize"] }
+compact_str = { version = "0.9.0", features = [
+  "serde",
+  "sqlx",
+  "sqlx-postgres",
+  "zeroize",
+] }
 config = { version = "0.15.11", default-features = false, features = ["toml"] }
 env_logger = "0.11.8"
 log = "0.4.27"
+maud = { version = "0.27.0", features = ["actix-web"] }
 secrecy = { version = "0.10.3", features = ["serde"] }
 serde = { version = "1.0.219", default-features = false, features = ["derive"] }
