@@ -7,7 +7,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let settings = Settings::new()?;
 
-    let server = build_server(&settings)?;
+    let server = build_server(&settings).await?;
     server.await?;
 
     Ok(())

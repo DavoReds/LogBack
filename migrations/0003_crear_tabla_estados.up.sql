@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS estados(
+  id UUID PRIMARY KEY,
+  nombre VARCHAR(100) UNIQUE NOT NULL,
+  color hex_color NOT NULL
+);
