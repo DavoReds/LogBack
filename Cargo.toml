@@ -5,6 +5,13 @@ edition = "2024"
 authors = ["Samuel David Rojas Vallejo <samueldavidrojasvallejo@gmail.com>"]
 description = "Aplicación para administrar listas de pendientes."
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "logback"
+
 [dependencies]
 actix-web = "4.11.0"
 anyhow = "1.0.98"
