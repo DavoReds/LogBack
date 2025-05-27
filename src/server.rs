@@ -2,7 +2,9 @@ use actix_web::{
     App, HttpServer,
     dev::Server,
     middleware::{Compress, Logger},
+    web,
 };
+use sqlx::postgres::PgPoolOptions;
 use std::net::TcpListener;
 
 use crate::{config::Settings, rutas::configurar_rutas};
@@ -13,14 +15,17 @@ use crate::{config::Settings, rutas::configurar_rutas};
 ///
 /// La función retorna un error si falla en conectarse al socket establecido.
 pub fn build_server(cfg: &Settings) -> Result<Server, anyhow::Error> {
+    let pool = web::Data::new(PgPoolOptions::new().connect_lazy_with(cfg.db.connect_options()));
+
     let address = format!("{}:{}", cfg.server.host, cfg.server.port);
     let listener = TcpListener::bind(&address)?;
 
-    let server = HttpServer::new(|| {
+    let server = HttpServer::new(move || {
         App::new()
             .wrap(Logger::new("%r %s %b %D"))
             .wrap(Compress::default())
             .configure(configurar_rutas)
+            .app_data(pool.clone())
     })
     .listen(listener)?
     .run();

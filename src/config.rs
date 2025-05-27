@@ -1,16 +1,48 @@
 use anyhow::Context;
 use compact_str::CompactString;
+use secrecy::{ExposeSecret, SecretBox};
 use serde::Deserialize;
+use sqlx::postgres::{PgConnectOptions, PgSslMode};
 
 #[derive(Debug, Deserialize)]
 pub struct Settings {
     pub server: ServerSettings,
+    pub db: DatabaseSettings,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct ServerSettings {
     pub host: CompactString,
     pub port: u16,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct DatabaseSettings {
+    pub user: CompactString,
+    pub password: SecretBox<CompactString>,
+    pub db: CompactString,
+    pub host: CompactString,
+    pub port: u16,
+    pub ssl: bool,
+}
+
+impl DatabaseSettings {
+    /// Crea un objeto que contiene las opciones de conexión a la base de datos.
+    pub fn connect_options(&self) -> PgConnectOptions {
+        let ssl = if self.ssl {
+            PgSslMode::Require
+        } else {
+            PgSslMode::Prefer
+        };
+
+        PgConnectOptions::new()
+            .host(&self.host)
+            .username(&self.user)
+            .password(self.password.expose_secret())
+            .port(self.port)
+            .ssl_mode(ssl)
+            .database(&self.db)
+    }
 }
 
 impl Settings {
@@ -30,6 +62,9 @@ impl Settings {
         let settings = config::Config::builder()
             .set_default("server.host", "localhost")?
             .set_default("server.port", 3000)?
+            .set_default("db.host", "localhost")?
+            .set_default("db.port", 5432)?
+            .set_default("db.ssl", false)?
             .add_source(config::File::from(base_path.join("config.toml")))
             .add_source(
                 config::Environment::with_prefix("LOGBACK")
