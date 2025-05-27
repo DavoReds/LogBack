@@ -1,5 +1,7 @@
 use maud::{DOCTYPE, Markup, html};
 
+#[must_use]
+#[allow(clippy::needless_pass_by_value)]
 pub fn page(title: &str, content: Markup) -> Markup {
     html! {
         (DOCTYPE)

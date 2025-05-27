@@ -19,6 +19,15 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+enum_glob_use = "deny"
+nursery = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+
 [dependencies]
 actix-web = "4.11.0"
 anyhow = "1.0.98"
