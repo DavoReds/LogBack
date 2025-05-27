@@ -19,6 +19,9 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
+[profile.dev.package.sqlx-macros]
+opt-level = 3
+
 [lints.rust]
 unsafe_code = "forbid"
 
