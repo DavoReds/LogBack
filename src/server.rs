@@ -7,6 +7,11 @@ use std::net::TcpListener;
 
 use crate::{config::Settings, rutas::configurar_rutas};
 
+/// Construye un servidor de `LogBack` basado en una configuración.
+///
+/// # Errors
+///
+/// La función retorna un error si falla en conectarse al socket establecido.
 pub fn build_server(cfg: &Settings) -> Result<Server, anyhow::Error> {
     let address = format!("{}:{}", cfg.server.host, cfg.server.port);
     let listener = TcpListener::bind(&address)?;
