@@ -1,4 +1,4 @@
 pub mod config;
-pub mod rutas;
+pub mod routes;
 pub mod server;
 pub mod templates;

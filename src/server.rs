@@ -10,7 +10,7 @@ use std::net::TcpListener;
 
 use crate::{
     config::{DatabaseSettings, Settings},
-    rutas::configurar_rutas,
+    routes::configurar_rutas,
 };
 
 /// Construye un servidor de `LogBack` basado en una configuración.
