@@ -18,8 +18,33 @@ pub fn page(title: &str, content: Markup) -> Markup {
                 meta name="description" content="Aplicación para administrar listas de pendientes";
             }
             body {
-                main .container hx-boost="true" {
-                    (content)
+                div .container hx-boost="true" {
+                    header {
+                        nav {
+                            ul {
+                                li {
+                                    a href="/" { strong { "LogBack" } }
+                                }
+                                li {
+                                    a .secondary href="/config" { "Configuración" }
+                                }
+                            }
+                            ul {
+                                li {
+                                    a .contrast href="/entradas" { "Entradas" }
+                                }
+                                li {
+                                    a .contrast href="/tipos" { "Tipos" }
+                                }
+                                li {
+                                    a .contrast href="/estados" { "Estados" }
+                                }
+                            }
+                        }
+                    }
+                    main {
+                        (content)
+                    }
                 }
             }
         }

@@ -29,10 +29,8 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
     Ok(page(
         "Principal",
         html! {
-            h1 { "LogBack" }
-
             section {
-                h2 { "Nueva Entrada" }
+                h1 { "Nueva Entrada" }
 
                 form action="/entradas" method="POST" {
                     label {
