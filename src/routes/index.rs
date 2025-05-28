@@ -10,30 +10,45 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, actix_web::Error> 
         .await
         .map_err(|_| actix_web::error::ErrorInternalServerError("Algo salió mal"))?;
 
+    let tipos = sqlx::query!("SELECT id, nombre, color FROM tipos")
+        .fetch_all(pool.as_ref())
+        .await
+        .map_err(|_| actix_web::error::ErrorInternalServerError("Algo salió mal"))?;
+
     Ok(page(
         "Principal",
         html! {
             h1 { "LogBack" }
 
-            h2 { "Crear Nueva Entrada" }
+            section {
+                h2 { "Nueva Entrada" }
 
-            form {
-                fieldset {
+                form action="/entradas" method="POST" {
                     label {
                         "Nombre"
-                        input name="nombre" type="text";
+                        input name="nombre" type="text" required;
                     }
+                    fieldset .grid {
+                        label {
+                            "Tipo"
+                            select name="tipo" aria-label="Tipo" required {
+                                @for tipo in tipos {
+                                    option value=(tipo.id) {(tipo.nombre)}
+                                }
+                            }
+                        }
+                        label {
+                            "Estado"
+                            select name="estado" aria-label="Estado" required {
+                                @for estado in estados {
+                                    option value=(estado.id) {(estado.nombre)}
+                                }
+                            }
+                        }
+                    }
+                    input type="submit" value="Crear";
                 }
             }
-
-            ul {
-                @for estado in estados {
-                    li style={"color:" (estado.color)}{
-                        (estado.id)
-                        " - "
-                        (estado.nombre)
-                    }
-                }
             }
         },
     ))

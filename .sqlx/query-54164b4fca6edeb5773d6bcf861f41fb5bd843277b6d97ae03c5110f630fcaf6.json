@@ -1,0 +1,32 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT id, nombre, color FROM tipos",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "nombre",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "color",
+        "type_info": "Bpchar"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "54164b4fca6edeb5773d6bcf861f41fb5bd843277b6d97ae03c5110f630fcaf6"
+}
