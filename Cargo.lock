@@ -1307,6 +1307,7 @@ dependencies = [
  "secrecy",
  "serde",
  "sqlx",
+ "thiserror",
 ]
 
 [[package]]

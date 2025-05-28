@@ -1,19 +1,30 @@
-use actix_web::web;
+use actix_web::{ResponseError, web};
 use maud::{Markup, html};
 use sqlx::PgPool;
+use thiserror::Error;
 
 use crate::templates::page;
 
-pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, actix_web::Error> {
-    let estados = sqlx::query!("SELECT id, nombre, color FROM estados")
-        .fetch_all(pool.as_ref())
-        .await
-        .map_err(|_| actix_web::error::ErrorInternalServerError("Algo salió mal"))?;
+#[derive(Debug, Error)]
+pub enum IndexError {
+    #[error("Algo salió mal")]
+    UnexpectedError(#[from] sqlx::Error),
+}
 
+impl ResponseError for IndexError {
+    fn status_code(&self) -> actix_web::http::StatusCode {
+        actix_web::http::StatusCode::INTERNAL_SERVER_ERROR
+    }
+}
+
+pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
     let tipos = sqlx::query!("SELECT id, nombre, color FROM tipos")
         .fetch_all(pool.as_ref())
-        .await
-        .map_err(|_| actix_web::error::ErrorInternalServerError("Algo salió mal"))?;
+        .await?;
+
+    let estados = sqlx::query!("SELECT id, nombre, color FROM estados")
+        .fetch_all(pool.as_ref())
+        .await?;
 
     Ok(page(
         "Principal",
@@ -48,7 +59,6 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, actix_web::Error> 
                     }
                     input type="submit" value="Crear";
                 }
-            }
             }
         },
     ))

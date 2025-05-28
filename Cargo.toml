@@ -57,3 +57,4 @@ sqlx = { version = "0.8.6", default-features = false, features = [
   "tls-rustls",
   "uuid",
 ] }
+thiserror = "2.0.12"
