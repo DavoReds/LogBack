@@ -1,3 +1,4 @@
+use actix_files::Files;
 use actix_web::{
     App, HttpServer,
     dev::Server,
@@ -29,6 +30,7 @@ pub async fn build_server(cfg: &Settings) -> Result<Server, anyhow::Error> {
             .wrap(Logger::new("%r %s %b %D"))
             .wrap(Compress::default())
             .configure(configurar_rutas)
+            .service(Files::new("/public", "./public").prefer_utf8(true))
             .app_data(pool.clone())
     })
     .listen(listener)?

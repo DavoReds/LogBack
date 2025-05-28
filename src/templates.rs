@@ -11,6 +11,8 @@ pub fn page(title: &str, content: Markup) -> Markup {
                 meta name="viewport" content="width=device-width,initial-scale=1";
                 meta name="color-scheme" content="light dark";
 
+                link rel="stylesheet" href="/public/css/pico.pink.min.css";
+
                 title { (title) " | LogBack" }
                 meta name="description" content="Aplicación para administrar listas de pendientes";
             }
