@@ -37,7 +37,7 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
                 form action="/entradas" method="POST" {
                     label {
                         "Nombre"
-                        input name="nombre" type="text" required;
+                        input name="nombre" type="text" maxlength="100" required;
                     }
                     fieldset .grid {
                         label {
