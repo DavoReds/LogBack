@@ -35,6 +35,7 @@ unwrap_used = "deny"
 actix-files = "0.6.6"
 actix-web = "4.11.0"
 anyhow = "1.0.98"
+chrono = { version = "0.4.41", default-features = false, features = ["clock"] }
 compact_str = { version = "0.9.0", features = [
   "serde",
   "sqlx",
@@ -58,3 +59,8 @@ sqlx = { version = "0.8.6", default-features = false, features = [
   "uuid",
 ] }
 thiserror = "2.0.12"
+uuid = { version = "1.17.0", default-features = false, features = [
+  "serde",
+  "v7",
+  "zerocopy",
+] }
