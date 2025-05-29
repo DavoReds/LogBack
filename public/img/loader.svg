@@ -1,0 +1,28 @@
+<svg width="64" height="16" viewBox="0 0 64 16" xmlns="http://www.w3.org/2000/svg"><defs><style>
+              @keyframes scale_up_SMINB {
+                0% {
+                  transform: scale(0);
+                }
+                100% {
+                  transform: scale(1);
+                }
+              }
+              
+              @keyframes scale_down_SMINB {
+                0% {
+                  transform: scale(1);
+                }
+                100% {
+                  transform: scale(0);
+                }
+              }
+              
+              @keyframes translate_SMINB {
+                0% {
+                  transform: translate(0, 0);
+                }
+                100% {
+                  transform: translate(24px, 0);
+                }
+              }
+            </style></defs><circle cx="8" cy="8" r="8" fill="#f0f1f3" style="animation:scale_up_SMINB 0.8s infinite;animation-timing-function:cubic-bezier(0, 1, 1, 0);transform-origin:8px 8px"></circle><circle cx="8" cy="8" r="8" fill="#f0f1f3" style="animation:translate_SMINB 0.8s infinite;animation-timing-function:cubic-bezier(0, 1, 1, 0)"></circle><circle cx="32" cy="8" r="8" fill="#f0f1f3" style="animation:translate_SMINB 0.8s infinite;animation-timing-function:cubic-bezier(0, 1, 1, 0)"></circle><circle cx="56" cy="8" r="8" fill="#f0f1f3" style="animation:scale_down_SMINB 0.8s infinite;animation-timing-function:cubic-bezier(0, 1, 1, 0);transform-origin:56px 8px"></circle></svg>

@@ -29,8 +29,10 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
     Ok(page(
         "Principal",
         html! {
-            section {
-                h1 { "Nueva Entrada" }
+            article {
+                header {
+                    h3 { "Nueva Entrada" }
+                }
 
                 form action="/entradas" method="POST" {
                     label {
@@ -57,6 +59,14 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
                     }
                     input type="submit" value="Crear";
                 }
+            }
+            div
+                hx-get="/entradas"
+                hx-trigger="load"
+                hx-select="#entradas"
+                hx-swap="outerHTML"
+            {
+                img .htmx-indicator alt="Cargando entradas..." src="/public/img/loader.svg";
             }
         },
     ))

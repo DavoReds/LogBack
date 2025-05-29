@@ -1,6 +1,8 @@
+mod entradas;
 mod index;
 
 use actix_web::{Responder, web};
+use entradas::get_entradas;
 use index::index;
 
 async fn ping() -> impl Responder {
@@ -12,5 +14,6 @@ async fn ping() -> impl Responder {
 
 pub fn configurar_rutas(cfg: &mut web::ServiceConfig) {
     cfg.route("/", web::get().to(index))
-        .route("/ping", web::get().to(ping));
+        .route("/ping", web::get().to(ping))
+        .route("/entradas", web::get().to(get_entradas));
 }
