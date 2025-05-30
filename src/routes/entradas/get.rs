@@ -57,10 +57,10 @@ pub async fn get_entradas(pool: web::Data<PgPool>) -> Markup {
                                 td style={"color:" (entrada.color_estado)} { (entrada.estado) }
                                 td {
                                     div.grid {
-                                        button .contrast {
+                                        button .contrast data-tooltip="Editar" {
                                             img width="16" alt="Editar" src="/public/img/lapiz.svg";
                                         }
-                                        button {
+                                        button data-tooltip="Eliminar" {
                                             img width="16" alt="Eliminar" src="/public/img/cross.svg";
                                         }
                                     }
