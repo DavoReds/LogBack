@@ -1,0 +1,50 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT\n        e.id, e.nombre, t.nombre as tipo, t.color AS color_tipo,\n        s.nombre as estado, s.color AS color_estado\n        FROM entradas e\n        JOIN tipos t ON (e.tipo = t.id)\n        JOIN estados s ON (e.estado = s.id)\n        ORDER BY t.nombre",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "nombre",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "tipo",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "color_tipo",
+        "type_info": "Bpchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "estado",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "color_estado",
+        "type_info": "Bpchar"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "83892f8a3bb0a1d6dc408ecc54812b2e0e3089c1c6fde683fdb703342f5f76aa"
+}

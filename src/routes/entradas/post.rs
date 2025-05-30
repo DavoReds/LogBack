@@ -1,4 +1,4 @@
-use actix_web::{Responder, web};
+use actix_web::{HttpResponse, Responder, web};
 use chrono::Local;
 use serde::Deserialize;
 use sqlx::PgPool;
@@ -31,8 +31,10 @@ pub async fn post_entradas(
     .await
     {
         log::error!("{e}");
-        return "No Insertado";
+        return HttpResponse::InternalServerError().finish();
     }
 
-    "Insertado"
+    HttpResponse::Created()
+        .insert_header(("HX-Trigger", "buscar_entradas"))
+        .body("¡Creado!")
 }

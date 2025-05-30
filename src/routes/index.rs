@@ -34,7 +34,11 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
                     h3 { "Nueva Entrada" }
                 }
 
-                form action="/entradas" method="POST" {
+                form
+                    hx-post="/entradas"
+                    hx-swap="none"
+                    "hx-on::after-request"="if(event.detail.successful) this.reset()"
+                {
                     label {
                         "Nombre"
                         input name="nombre" type="text" maxlength="100" required;
@@ -60,11 +64,12 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
                     input type="submit" value="Crear";
                 }
             }
+
             div
                 hx-get="/entradas"
-                hx-trigger="load"
+                hx-trigger="load, buscar_entradas from:body"
                 hx-select="#entradas"
-                hx-swap="outerHTML"
+                hx-swap="innerHTML"
             {
                 img .htmx-indicator alt="Cargando entradas..." src="/public/img/loader.svg";
             }
