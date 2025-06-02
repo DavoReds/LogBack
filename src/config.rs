@@ -56,8 +56,8 @@ impl Settings {
     /// actual, si no encuentra el archivo de configuración o si la
     /// configuración provista no puede ser deserializada correctamente.
     pub fn new() -> Result<Self, anyhow::Error> {
-        let base_path =
-            std::env::current_dir().context("No se pudo determinar el directorio actual")?;
+        let base_path = std::env::current_dir()
+            .context("No se pudo determinar el directorio actual")?;
 
         let settings = config::Config::builder()
             .set_default("server.host", "localhost")?
@@ -65,7 +65,10 @@ impl Settings {
             .set_default("db.host", "localhost")?
             .set_default("db.port", 5432)?
             .set_default("db.ssl", false)?
-            .add_source(config::File::from(base_path.join("config.toml")))
+            .add_source(
+                config::File::from(base_path.join("config.toml"))
+                    .required(false),
+            )
             .add_source(
                 config::Environment::with_prefix("LOGBACK")
                     .prefix_separator("_")
