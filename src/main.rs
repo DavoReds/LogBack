@@ -1,9 +1,8 @@
-use env_logger::Env;
 use logback::{config::Settings, server::build_server};
 
 #[actix_web::main]
 async fn main() -> Result<(), anyhow::Error> {
-    env_logger::init_from_env(Env::default().default_filter_or("info"));
+    pretty_env_logger::try_init_timed_custom_env("LOGBACK_LOG")?;
 
     let settings = Settings::new()?;
 
