@@ -12,7 +12,7 @@ db name="postgres" port="5432":
     --name {{ name }} \
     docker.io/postgres:17-alpine
 
-watch:
+watch $LOGBACK_LOG="info":
     @watchexec -c -r -e rs,toml,sql cargo r
 
 alias w := watch
