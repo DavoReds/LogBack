@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "SELECT id, nombre, color FROM estados",
+  "query": "SELECT id, nombre FROM tipos",
   "describe": {
     "columns": [
       {
@@ -12,11 +12,6 @@
         "ordinal": 1,
         "name": "nombre",
         "type_info": "Varchar"
-      },
-      {
-        "ordinal": 2,
-        "name": "color",
-        "type_info": "Bpchar"
       }
     ],
     "parameters": {
@@ -24,9 +19,8 @@
     },
     "nullable": [
       false,
-      false,
       false
     ]
   },
-  "hash": "d02156b09686999e606495c6df593baf1f0796a86890d54201ae1e1e937cb652"
+  "hash": "9fef407e673d764be36d8897c4a33e63f6a87ee6e903a7ba089e20a0b3c2a52d"
 }

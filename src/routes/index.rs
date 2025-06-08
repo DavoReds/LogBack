@@ -3,7 +3,10 @@ use maud::{Markup, html};
 use sqlx::PgPool;
 use thiserror::Error;
 
-use crate::templates::page;
+use crate::{
+    database::{select_estados, select_tipos},
+    templates::page,
+};
 
 #[derive(Debug, Error)]
 pub enum IndexError {
@@ -18,13 +21,8 @@ impl ResponseError for IndexError {
 }
 
 pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
-    let tipos = sqlx::query!("SELECT id, nombre, color FROM tipos")
-        .fetch_all(pool.as_ref())
-        .await?;
-
-    let estados = sqlx::query!("SELECT id, nombre, color FROM estados")
-        .fetch_all(pool.as_ref())
-        .await?;
+    let tipos = select_tipos(pool.as_ref()).await?;
+    let estados = select_estados(pool.as_ref()).await?;
 
     Ok(page(
         "Principal",
