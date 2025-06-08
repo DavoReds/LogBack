@@ -15,6 +15,8 @@ pub async fn post_entradas(
     pool: web::Data<PgPool>,
     form: web::Form<PostEntradasInput>,
 ) -> impl Responder {
+    log::info!("Insertando nueva entrada");
+
     let fecha = Local::now().date_naive();
     let id = Uuid::now_v7();
 
@@ -36,5 +38,5 @@ pub async fn post_entradas(
 
     HttpResponse::Created()
         .insert_header(("HX-Trigger", "buscar_entradas"))
-        .body("¡Creado!")
+        .finish()
 }
