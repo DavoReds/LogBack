@@ -28,6 +28,7 @@ pub struct DatabaseSettings {
 
 impl DatabaseSettings {
     /// Crea un objeto que contiene las opciones de conexión a la base de datos.
+    #[must_use]
     pub fn connect_options(&self) -> PgConnectOptions {
         let ssl = if self.ssl {
             PgSslMode::Require
