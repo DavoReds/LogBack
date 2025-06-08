@@ -3,22 +3,25 @@ mod index;
 
 use actix_web::{Responder, web};
 
-use entradas::{get_entradas, post_entradas};
-use index::index;
-
-async fn ping() -> impl Responder {
-    let name = env!("CARGO_PKG_NAME");
-    let version = env!("CARGO_PKG_VERSION");
-
-    format!("{name} v{version}")
-}
+use crate::routes::{
+    entradas::{delete_entrada, get_entradas, post_entradas},
+    index::index,
+};
 
 pub fn configurar_rutas(cfg: &mut web::ServiceConfig) {
     cfg.route("/", web::get().to(index))
         .route("/ping", web::get().to(ping))
         .service(
             web::resource("/entradas")
-                .route(web::get().to(get_entradas))
-                .route(web::post().to(post_entradas)),
-        );
+                .get(get_entradas)
+                .post(post_entradas),
+        )
+        .service(web::resource("/entradas/{id}").delete(delete_entrada));
+}
+
+async fn ping() -> impl Responder {
+    let name = env!("CARGO_PKG_NAME");
+    let version = env!("CARGO_PKG_VERSION");
+
+    format!("{name} v{version}")
 }
