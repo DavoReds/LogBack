@@ -107,7 +107,9 @@ fn tabla_entradas(entradas: &[Entrada]) -> Markup {
                                     button
                                         data-tooltip="Eliminar"
                                         hx-delete={"/entradas/" (entrada.id)}
-                                        hx-swap="none"
+                                        hx-target="closest tr"
+                                        hx-swap="outerHTML"
+                                        hx-confirm="¿Desea eliminar la entrada?"
                                     {
                                         img width="16" alt="Eliminar" src="/public/img/cross.svg";
                                     }

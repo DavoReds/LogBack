@@ -18,7 +18,5 @@ pub async fn delete_entrada(
         return HttpResponse::InternalServerError().finish();
     }
 
-    HttpResponse::Ok()
-        .insert_header(("HX-Trigger", "buscar_entradas"))
-        .finish()
+    HttpResponse::Ok().finish()
 }
