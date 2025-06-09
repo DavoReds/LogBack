@@ -19,6 +19,37 @@ pub async fn get_nuevo_usuario(
         "Nuevo Usuario",
         html! {
             h1 { "Nuevo Usuario" }
+
+            form action="/usuarios" method="POST" {
+                fieldset {
+                    label {
+                        "Nombre"
+                        input
+                            type="text"
+                            maxlength="100"
+                            name="nombre"
+                            autocomplete="username"
+                            required;
+                    }
+                    label {
+                        "Contraseña"
+                        input
+                            type="password"
+                            name="clave"
+                            autocomplete="new-password"
+                            required;
+                    }
+                    label {
+                        "Confirmar contraseña"
+                        input
+                            type="password"
+                            name="confirmar"
+                            autocomplete="off"
+                            required;
+                    }
+                }
+                input type="submit" value="Crear";
+            }
         },
     ))
 }
