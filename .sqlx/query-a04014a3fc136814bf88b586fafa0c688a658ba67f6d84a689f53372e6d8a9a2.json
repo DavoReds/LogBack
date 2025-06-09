@@ -1,0 +1,40 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT id, nombre, tipo, estado from entradas WHERE id = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "nombre",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "tipo",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 3,
+        "name": "estado",
+        "type_info": "Uuid"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "a04014a3fc136814bf88b586fafa0c688a658ba67f6d84a689f53372e6d8a9a2"
+}

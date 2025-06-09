@@ -57,7 +57,7 @@ impl ResponseError for GetEntradasError {
     fn error_response(
         &self,
     ) -> actix_web::HttpResponse<actix_web::body::BoxBody> {
-        log::error!("Error interactuando con la base de datos: {self:?}");
+        log::error!("Error en la base de datos: {self:?}");
 
         HttpResponse::Ok().content_type(ContentType::html()).body(page(
                 "Entradas",
@@ -94,9 +94,16 @@ fn tabla_entradas(entradas: &[Entrada]) -> Markup {
                             td style={"color:" (entrada.color_estado)} { (entrada.estado) }
                             td {
                                 div.grid {
-                                    button .contrast data-tooltip="Editar" {
+                                    button
+                                        .contrast
+                                        data-tooltip="Editar"
+                                        hx-get={"/entradas/" (entrada.id) "/editar"}
+                                        hx-target="closest tr"
+                                        hx-swap="outerHTML"
+                                    {
                                         img width="16" alt="Editar" src="/public/img/lapiz.svg";
                                     }
+
                                     button
                                         data-tooltip="Eliminar"
                                         hx-delete={"/entradas/" (entrada.id)}
