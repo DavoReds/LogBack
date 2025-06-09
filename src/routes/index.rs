@@ -66,7 +66,6 @@ pub async fn index(pool: web::Data<PgPool>) -> Result<Markup, IndexError> {
             div
                 hx-get="/entradas"
                 hx-trigger="load, buscar_entradas from:body"
-                hx-select="#entradas"
                 hx-swap="innerHTML"
             {
                 img .htmx-indicator alt="Cargando entradas..." src="/public/img/loader.svg";
