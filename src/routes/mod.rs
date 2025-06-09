@@ -2,6 +2,7 @@ mod entradas;
 mod index;
 mod usuarios;
 
+use actix_files::Files;
 use actix_web::{Responder, middleware::from_fn, web};
 
 use crate::{
@@ -18,7 +19,8 @@ use crate::{
 
 pub fn configurar_rutas(cfg: &mut web::ServiceConfig) {
     cfg.route("/ping", web::get().to(ping))
-        .route("/usuarios", web::get().to(get_nuevo_usuario));
+        .route("/usuarios", web::get().to(get_nuevo_usuario))
+        .service(Files::new("/public", "./public").prefer_utf8(true));
 
     cfg.service(
         web::scope("")
