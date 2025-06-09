@@ -25,19 +25,12 @@ pub fn page(title: &str, content: Markup) -> Markup {
                                 li {
                                     a href="/" { strong { "LogBack" } }
                                 }
-                                li {
-                                    a .secondary href="/config" { "Configuración" }
-                                }
                             }
                             ul {
                                 li {
                                     a .contrast href="/entradas" { "Entradas" }
                                 }
                                 li {
-                                    a .contrast href="/tipos" { "Tipos" }
-                                }
-                                li {
-                                    a .contrast href="/estados" { "Estados" }
                                 }
                             }
                         }
