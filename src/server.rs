@@ -7,10 +7,11 @@ use actix_web::{
 };
 use anyhow::Context;
 use sqlx::{PgPool, postgres::PgPoolOptions};
-use std::net::TcpListener;
+use std::{net::TcpListener, sync::atomic::AtomicBool};
 
 use crate::{
     config::{DatabaseSettings, Settings},
+    database::usuarios::comprobar_usuarios,
     routes::configurar_rutas,
 };
 
@@ -22,6 +23,12 @@ use crate::{
 pub async fn build_server(cfg: &Settings) -> Result<Server, anyhow::Error> {
     let pool = web::Data::new(create_pool(&cfg.db).await?);
 
+    let usuario = comprobar_usuarios(pool.as_ref()).await.context(
+        "No se pudo comprobar la existencia de usuarios en la base de datos",
+    )?;
+
+    let usuario = web::Data::new(AtomicBool::new(usuario));
+
     let address = format!("{}:{}", cfg.server.host, cfg.server.port);
     let listener = TcpListener::bind(&address)?;
 
@@ -32,6 +39,7 @@ pub async fn build_server(cfg: &Settings) -> Result<Server, anyhow::Error> {
             .configure(configurar_rutas)
             .service(Files::new("/public", "./public").prefer_utf8(true))
             .app_data(pool.clone())
+            .app_data(usuario.clone())
     })
     .listen(listener)?
     .run();
