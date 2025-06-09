@@ -6,7 +6,9 @@ use sqlx::PgPool;
 use thiserror::Error;
 use uuid::Uuid;
 
-use crate::database::{select_entrada, select_estados, select_tipos};
+use crate::database::{
+    entradas::select_entrada, estados::select_estados, tipos::select_tipos,
+};
 
 pub async fn get_formulario_entrada(
     pool: web::Data<PgPool>,

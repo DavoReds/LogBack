@@ -4,7 +4,7 @@ use sqlx::PgPool;
 use thiserror::Error;
 
 use crate::{
-    database::{select_estados, select_tipos},
+    database::{estados::select_estados, tipos::select_tipos},
     templates::page,
 };
 
