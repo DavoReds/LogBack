@@ -16,6 +16,11 @@ pub fn page(title: &str, content: Markup) -> Markup {
 
                 title { (title) " | LogBack" }
                 meta name="description" content="Aplicación para administrar listas de pendientes";
+
+                link rel="apple-touch-icon" sizes="180x180" href="/public/img/apple-touch-icon.png";
+                link rel="icon" type="image/png" sizes="32x32" href="/public/img/favicon-32x32.png";
+                link rel="icon" type="image/png" sizes="16x16" href="/public/img/favicon-16x16.png";
+                link rel="manifest" href="/public/site.webmanifest";
             }
             body {
                 div .container hx-boost="true" {
@@ -60,6 +65,11 @@ pub fn page_no_header(title: &str, content: Markup) -> Markup {
 
                 title { (title) " | LogBack" }
                 meta name="description" content="Aplicación para administrar listas de pendientes";
+
+                link rel="apple-touch-icon" sizes="180x180" href="/public/img/apple-touch-icon.png";
+                link rel="icon" type="image/png" sizes="32x32" href="/public/img/favicon-32x32.png";
+                link rel="icon" type="image/png" sizes="16x16" href="/public/img/favicon-16x16.png";
+                link rel="manifest" href="/public/site.webmanifest";
             }
             body {
                 main .container hx-boost="true" {
