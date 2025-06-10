@@ -13,13 +13,17 @@ use crate::{
             post_entradas, put_entrada,
         },
         index::index,
-        usuarios::get_nuevo_usuario,
+        usuarios::{get_nuevo_usuario, post_usuario},
     },
 };
 
 pub fn configurar_rutas(cfg: &mut web::ServiceConfig) {
     cfg.route("/ping", web::get().to(ping))
-        .route("/usuarios", web::get().to(get_nuevo_usuario))
+        .service(
+            web::scope("/usuarios")
+                .route("", web::get().to(get_nuevo_usuario))
+                .route("", web::post().to(post_usuario)),
+        )
         .service(Files::new("/public", "./public").prefer_utf8(true));
 
     cfg.service(

@@ -21,15 +21,15 @@ pub async fn existen_usuarios(
         .expect("Estado debe existir");
 
     if usuario_existe.load(Ordering::Relaxed) {
-        let res = next.call(req).await?;
-        return Ok(res.map_body(|_, body| EitherBody::left(body)));
+        let response = next.call(req).await?;
+        return Ok(response.map_body(|_, body| EitherBody::left(body)));
     }
 
-    let res = req.into_response(
+    let response = req.into_response(
         HttpResponse::SeeOther()
             .insert_header(("Location", "/usuarios"))
             .finish(),
     );
 
-    Ok(res.map_body(|_, body| EitherBody::right(body)))
+    Ok(response.map_body(|_, body| EitherBody::right(body)))
 }

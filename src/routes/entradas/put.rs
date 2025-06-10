@@ -86,7 +86,7 @@ impl ResponseError for GetFormularioEntradaError {
     ) -> actix_web::HttpResponse<actix_web::body::BoxBody> {
         log::error!("Error en la base de datos: {self:?}");
 
-        if let Self::Inesperado(sqlx::Error::RowNotFound) = self {
+        if matches!(self, Self::Inesperado(sqlx::Error::RowNotFound)) {
             HttpResponse::NotFound().finish()
         } else {
             HttpResponse::InternalServerError().finish()

@@ -1,8 +1,8 @@
 use actix_web::{Either, HttpResponse, web};
-use maud::{Markup, html};
+use maud::Markup;
 use std::sync::atomic::{AtomicBool, Ordering};
 
-use crate::templates::page_no_header;
+use super::formulario_nuevo_usuario;
 
 pub async fn get_nuevo_usuario(
     existe: web::Data<AtomicBool>,
@@ -15,41 +15,5 @@ pub async fn get_nuevo_usuario(
         );
     }
 
-    Either::Right(page_no_header(
-        "Nuevo Usuario",
-        html! {
-            h1 { "Nuevo Usuario" }
-
-            form action="/usuarios" method="POST" {
-                fieldset {
-                    label {
-                        "Nombre"
-                        input
-                            type="text"
-                            maxlength="100"
-                            name="nombre"
-                            autocomplete="username"
-                            required;
-                    }
-                    label {
-                        "Contraseña"
-                        input
-                            type="password"
-                            name="clave"
-                            autocomplete="new-password"
-                            required;
-                    }
-                    label {
-                        "Confirmar contraseña"
-                        input
-                            type="password"
-                            name="confirmar"
-                            autocomplete="off"
-                            required;
-                    }
-                }
-                input type="submit" value="Crear";
-            }
-        },
-    ))
+    Either::Right(formulario_nuevo_usuario(None))
 }

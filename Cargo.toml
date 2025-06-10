@@ -19,9 +19,6 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
-[profile.dev.package.sqlx-macros]
-opt-level = 3
-
 [lints.rust]
 unsafe_code = "forbid"
 
@@ -35,6 +32,7 @@ unwrap_used = "deny"
 actix-files = "0.6.6"
 actix-web = "4.11.0"
 anyhow = "1.0.98"
+argon2 = "0.5.3"
 chrono = { version = "0.4.41", default-features = false, features = ["clock"] }
 compact_str = { version = "0.9.0", features = [
   "serde",
