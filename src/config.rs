@@ -20,7 +20,7 @@ pub struct ServerSettings {
 pub struct DatabaseSettings {
     pub user: CompactString,
     pub password: SecretBox<CompactString>,
-    pub db: CompactString,
+    pub name: CompactString,
     pub host: CompactString,
     pub port: u16,
     pub ssl: bool,
@@ -42,7 +42,7 @@ impl DatabaseSettings {
             .password(self.password.expose_secret())
             .port(self.port)
             .ssl_mode(ssl)
-            .database(&self.db)
+            .database(&self.name)
     }
 }
 
