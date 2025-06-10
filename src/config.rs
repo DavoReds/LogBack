@@ -61,7 +61,7 @@ impl Settings {
             .context("No se pudo determinar el directorio actual")?;
 
         let settings = config::Config::builder()
-            .set_default("server.host", "localhost")?
+            .set_default("server.host", "0.0.0.0")?
             .set_default("server.port", 3000)?
             .set_default("db.host", "localhost")?
             .set_default("db.port", 5432)?
