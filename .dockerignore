@@ -1,0 +1,6 @@
+.cargo/
+target/
+
+config.toml
+Dockerfile
+.dockerignore
